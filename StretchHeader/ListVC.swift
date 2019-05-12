@@ -70,15 +70,15 @@ extension ListVC: UITableViewDataSource {
 }
 
 extension ListVC: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: self.tableView.bounds.width, height: 150))
-        imageView.image = UIImage(named: "header")
-        imageView.clipsToBounds = true
-        
-        let view = UIView(frame: CGRect(x: 0, y: 0, width: 250, height: 250))
-        view.backgroundColor = .yellow
-        return view
-    }
+//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+//        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: self.tableView.bounds.width, height: 150))
+//        imageView.image = UIImage(named: "header")
+//        imageView.clipsToBounds = true
+//        
+//        let view = UIView(frame: CGRect(x: 0, y: 0, width: 250, height: 250))
+//        view.backgroundColor = .yellow
+//        return view
+//    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
@@ -91,7 +91,6 @@ extension ListVC: UIScrollViewDelegate {
         stretchHeader.stretch(contentOffset: scrollView.contentOffset)
     }
     func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        print("scrollViewDidEndDragging")
         stretchHeader.setToDefaultHeight()
     }
 }

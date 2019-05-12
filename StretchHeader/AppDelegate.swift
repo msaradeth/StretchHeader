@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         let names: [String?] = ["Mike Saradeth", "John Smith", nil, "David Brown", "Janet Jonshon"]
-        let stretchHeader = StretchHeader(height: 200, maxHeight: 600)
+        let stretchHeader = StretchHeader(height: 150, maxHeight: 600)
         let vc = ListVC(items: names, stretchHeader: stretchHeader)
         vc.title = "List"
         

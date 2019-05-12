@@ -66,9 +66,9 @@ class StretchHeader: UIView {
     }
     
     func animate(duration: TimeInterval = 0.4) {
-        UIView.animate(withDuration: 0.5,
+        UIView.animate(withDuration: duration,
                        delay: 0,
-                       options: .curveEaseInOut,
+                       options: .curveEaseIn,
                        animations: { self.layoutIfNeeded() },
                        completion: nil)
     }
