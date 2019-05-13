@@ -18,17 +18,32 @@ class ListVC: UIViewController {
         return tableView
     }()
     var stretchHeader: StretchHeader
-    var items: [String]
+    var items: [Contact]
     
     
-    init(items: [String?], stretchHeader: StretchHeader) {
-        self.items = items.compactMap{ $0 }.sorted(by: { $0 < $1 })
+    init(items: [Contact], stretchHeader: StretchHeader) {
+        self.items = items  //items.compactMap{ $0 }.sorted(by: { $0 < $1 })
         self.stretchHeader = stretchHeader
         super.init(nibName: nil, bundle: nil)
         self.view.backgroundColor = .white
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(add))
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Delete Row", style: .plain, target: self, action: #selector(remove))
+        
+        
     }
     required init?(coder aDecoder: NSCoder) {
         fatalError("required init?(coder aDecoder: NSCoder) not implemented")
+    }
+    
+    @objc func add() {
+        items.append(Contact(firstName: String(0), lastName: String(items.count)))
+        let indexPath = IndexPath(row: items.count-1, section: 0)
+        tableView.insertRows(at: [indexPath], with: .automatic)
+    }
+    @objc func remove() {
+        items.removeLast()
+        let indexPath = IndexPath(row: items.count, section: 0)
+        tableView.deleteRows(at: [indexPath], with: .automatic)
     }
     
     override func viewDidLoad() {
@@ -63,26 +78,16 @@ extension ListVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as UITableViewCell
-        cell.textLabel?.text = items[indexPath.row]
+        cell.textLabel?.text = items[indexPath.row].fullName
         
         return cell
     }
 }
 
 extension ListVC: UITableViewDelegate {
-//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: self.tableView.bounds.width, height: 150))
-//        imageView.image = UIImage(named: "header")
-//        imageView.clipsToBounds = true
-//        
-//        let view = UIView(frame: CGRect(x: 0, y: 0, width: 250, height: 250))
-//        view.backgroundColor = .yellow
-//        return view
-//    }
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        title = items[indexPath.row]
+        title = items[indexPath.row].fullName
     }
 }
 

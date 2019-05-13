@@ -16,17 +16,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        let names: [String?] = ["Mike Saradeth", "John Smith", nil, "David Brown", "Janet Jonshon"]
+ 
         let stretchHeader = StretchHeader(height: 150, maxHeight: 600)
-        let vc = ListVC(items: names, stretchHeader: stretchHeader)
+        let vc = ListVC(items: Contact.load(), stretchHeader: stretchHeader)
         vc.title = "List"
         
-//        let rootNav = UINavigationController(rootViewController: vc)
-//        rootNav.navigationBar.prefersLargeTitles = true
-        
+        let rootNav = UINavigationController(rootViewController: vc)
+        rootNav.navigationBar.prefersLargeTitles = false
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
-        window?.rootViewController = vc
+        window?.rootViewController = rootNav
         
         return true
     }
